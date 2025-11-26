@@ -7,6 +7,7 @@ public class Main {
 	static String s;
 	static int N;
 	static int[] dp;
+	static boolean[][] palindrome;
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		s = br.readLine();
@@ -14,6 +15,21 @@ public class Main {
 		
 		dp = new int[N];
 		Arrays.fill(dp, -1);
+		
+		palindrome = new boolean[N][N];
+		
+		for (int len=1; len<=N; len++) {
+			for (int i=0; i+len-1<N; i++) {
+				int j = i+len-1;
+				
+				if(s.charAt(i)==s.charAt(j)) {
+					if (len <=2 ) palindrome[i][j]=true;
+					else palindrome[i][j] = palindrome[i+1][j-1]; 
+				}
+			}
+		}
+		
+		
 		System.out.println(dfs(0));
 	}
 	
@@ -23,7 +39,7 @@ public class Main {
 		
 		int res = dfs(start+1) + 1;
 		for (int i=start+1; i<N; i++) {
-			if (isPalindrome(start, i)) {
+			if (palindrome[start][i]) {
 				res = Math.min(dfs(i+1)+1, res);
 			}
 		}
@@ -31,19 +47,6 @@ public class Main {
 		return dp[start]=res;
 	}
 	
-	public static boolean isPalindrome(int start, int end) {
-		
-		int i = start;
-		int j = end;
-		
-		while(i<j) {
-			if (s.charAt(i)!=s.charAt(j)) return false;
-			i++;
-			j--;
-		}
-		
-		return true;
-	}
 }
 
 
