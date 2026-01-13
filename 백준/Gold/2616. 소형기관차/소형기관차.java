@@ -5,15 +5,17 @@ import java.util.*;
 
 public class Main{
 	static int N, M;
-	static int[] map;
+	static int[] map, sum;
 	static int[][] dp;
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		map = new int[N];
+		sum = new int[N];
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for (int i=0; i<N; i++) {
 			map[i] = Integer.parseInt(st.nextToken());
+			sum[i] = i==0?map[i]:map[i]+sum[i-1];
 		}
 		
 		M = Integer.parseInt(br.readLine());
@@ -27,11 +29,8 @@ public class Main{
 		if(choice==3) return 0;
 		if (dp[idx][choice] != -1) return dp[idx][choice];
 		
-		int res = 0;
+		int res = idx==0?sum[idx+M-1]:sum[idx+M-1]-sum[idx-1];
 		
-		for (int i=idx; i<idx+M; i++) {
-			res += map[i];
-		}
 		res += dfs(idx+M, choice+1);
 		
 		res = Math.max(res, dfs(idx+1, choice));
