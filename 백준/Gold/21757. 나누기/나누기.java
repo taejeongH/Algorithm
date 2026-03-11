@@ -22,10 +22,10 @@ public class Main{
 			return;
 		}
 		int target = sum/4;
-		int prefix = 0;
-		int count1 = 0;
-		int count2 = 0;
-		int res = 0;
+		long prefix = 0;
+		long count1 = 0;
+		long count2 = 0;
+		long res = 0;
 		
 		for (int i=0; i<N-1; i++) {
 			
