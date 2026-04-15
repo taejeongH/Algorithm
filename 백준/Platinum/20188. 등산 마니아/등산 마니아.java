@@ -30,7 +30,7 @@ public class Main{
 		long res = 0;
 		for (int i=2; i<=N; i++) {
 			int cnt = subTree[i];
-			res += 1L * (cnt * (2 * (N-1) + ((cnt-1) * -1)))/2;
+			res += (long) cnt * (2L * (N - 1) - (cnt - 1)) / 2;
 		}
 		System.out.println(res);
 	}
@@ -46,7 +46,5 @@ public class Main{
 	}
 	
 }
-
-//최소 공통 부모 찾기 -> 부모와의 거리 찾기? 
 
 //subtree의 개수를 구하고
